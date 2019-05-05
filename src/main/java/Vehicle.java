@@ -101,4 +101,32 @@ public class Vehicle {
     public GameBoard getBoard(){
         return gameBoard;
     }
+
+    public int getVehiclePositionX() {
+        return vehiclePositionX;
+    }
+
+    public int getVehiclePositionY() {
+        return vehiclePositionY;
+    }
+
+    public void setVehiclePositionX(int vehiclePositionX) {
+        this.vehiclePositionX = vehiclePositionX;
+    }
+
+    public void setVehiclePositionY(int vehiclePositionY) {
+        this.vehiclePositionY = vehiclePositionY;
+    }
+
+    public void setFuel(int fuel) {
+        this.fuel = fuel;
+    }
+
+    public void setGameBoard(GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
+    }
+
+    public static char getEmptyField() {
+        return emptyField;
+    }
 }

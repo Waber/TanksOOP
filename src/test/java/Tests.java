@@ -7,6 +7,6 @@ public class Tests {
 
     @Test
     public void checkForProperInheritance(){
-        Assert.assertTrue(tank.);
+
     }
 }
