@@ -1,4 +1,4 @@
-public class Tank extends Vehicle {
+public class Tank extends Car implements Vehicle {
 
     static final char tank = 't';
 
@@ -13,6 +13,7 @@ public class Tank extends Vehicle {
                 super.getBoard().setBoard(i,j,tank);
             }
         }
+        setFuel(20);
     }
 
     public char move(char direction){
@@ -24,7 +25,7 @@ public class Tank extends Vehicle {
                 if(super.getVehiclePositionX() < 0 ){
                     return 'b';
                 }
-                else if(super.getBoard().destinationCheck(super.getVehiclePositionX(), super.getVehiclePositionY())){
+                else if(checkIfPointReached()){
                     moveValue = 'p';
                 }
 
@@ -33,8 +34,79 @@ public class Tank extends Vehicle {
                 super.getBoard().setBoard(super.getVehiclePositionX()+2,super.getVehiclePositionY(),super.getEmptyField());
                 super.getBoard().setBoard(super.getVehiclePositionX()+2,super.getVehiclePositionY()+1,super.getEmptyField());
                 break;
+
+            case 'd':
+                super.setVehiclePositionX(super.getVehiclePositionX()+1);
+                if(super.getVehiclePositionX() > 8){
+                    return 'b';
+                }
+                else if(checkIfPointReached()){
+                    moveValue = 'p';
+                }
+
+                super.getBoard().setBoard(super.getVehiclePositionX()+1,super.getVehiclePositionY(),tank);
+                super.getBoard().setBoard(super.getVehiclePositionX()+1,super.getVehiclePositionY()+1,tank);
+                super.getBoard().setBoard(super.getVehiclePositionX()-1,super.getVehiclePositionY(),super.getEmptyField());
+                super.getBoard().setBoard(super.getVehiclePositionX()-1,super.getVehiclePositionY()+1,super.getEmptyField());
+                break;
+
+            case 'l':
+                super.setVehiclePositionY(super.getVehiclePositionY()-1);
+                if(super.getVehiclePositionY() < 0){
+                    return 'b';
+                }
+                else if(checkIfPointReached()){
+                    moveValue = 'p';
+                }
+
+                super.getBoard().setBoard(super.getVehiclePositionX(),super.getVehiclePositionY(),tank);
+                super.getBoard().setBoard(super.getVehiclePositionX()+1,super.getVehiclePositionY(),tank);
+                super.getBoard().setBoard(super.getVehiclePositionX(),super.getVehiclePositionY()+2,super.getEmptyField());
+                super.getBoard().setBoard(super.getVehiclePositionX()+1,super.getVehiclePositionY()+2,super.getEmptyField());
+                break;
+
+            case 'p':
+                super.setVehiclePositionY(super.getVehiclePositionY()+1);
+                if(super.getVehiclePositionY() > 8){
+                    return 'b';
+                }
+                else if(checkIfPointReached()){
+                    moveValue = 'p';
+                }
+
+                super.getBoard().setBoard(super.getVehiclePositionX(),super.getVehiclePositionY()+1,tank);
+                super.getBoard().setBoard(super.getVehiclePositionX()+1,super.getVehiclePositionY()+1,tank);
+                super.getBoard().setBoard(super.getVehiclePositionX(),super.getVehiclePositionY()-1,super.getEmptyField());
+                super.getBoard().setBoard(super.getVehiclePositionX()+1,super.getVehiclePositionY()-1,super.getEmptyField());
+                break;
+        }
+
+        setFuel(-2);
+
+        if(moveValue == 'p'){
+            super.getBoard().destination();
+            setFuel(10);
         }
 
         return   (moveValue == 'p') ? 'p' : 'm';
+    }
+
+
+    public void setFuel(int fuel){
+        super.setFuel(fuel);
+    }
+
+    public void vehiclePositionCheck(){
+        super.vehiclePositionCheck();
+    }
+
+    private boolean checkIfPointReached(){
+        if (super.getBoard().destinationCheck(super.getVehiclePositionX(), super.getVehiclePositionY())
+                || super.getBoard().destinationCheck(super.getVehiclePositionX()+1, super.getVehiclePositionY())
+                || super.getBoard().destinationCheck(super.getVehiclePositionX()+1, super.getVehiclePositionY()+1)
+                || super.getBoard().destinationCheck(super.getVehiclePositionX(), super.getVehiclePositionY()+1)){
+            return true;
+        }
+        return false;
     }
 }

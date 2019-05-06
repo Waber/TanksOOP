@@ -4,11 +4,18 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Vehicle car;
+        Car car;
         Scanner in = new Scanner(System.in);
         char direction;
         char vehicleStatus;
-        car = new Tank();
+
+        System.out.println("Wybierz rodzaj pojazdu c - samochód, t - czołg ");
+        if(in.next().charAt(0) == 'c'){
+            car = new Car();
+        }
+        else {
+            car = new Tank();
+        }
 
         do{
             car.getPrintBoard();

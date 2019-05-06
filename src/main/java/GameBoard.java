@@ -17,7 +17,7 @@ public class GameBoard {
         destination();
     }
 
-    protected void destination(){
+    public void destination(){
         int x, y;
 
         do{
